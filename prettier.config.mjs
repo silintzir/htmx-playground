@@ -1,6 +1,9 @@
-// prettier.config.js, .prettierrc.js, prettier.config.mjs, or .prettierrc.mjs
+// @ts-check
+/// <reference types="@prettier/plugin-pug/src/prettier" />
 
-/** @type {import("prettier").Config} */
+/**
+ * @type {import('prettier').Options}
+ */
 const config = {
   trailingComma: 'all',
   tabWidth: 2,
@@ -9,6 +12,12 @@ const config = {
   singleQuote: true,
 
   plugins: ['@prettier/plugin-pug'],
+
+  pugBracketSpacing: false,
+  pugUseTabs: false,
+  pugExplicitDiv: true,
+  pugSingleQuote: false,
+  pugClassNotation: 'attribute',
 };
 
 export default config;
