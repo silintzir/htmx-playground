@@ -4,7 +4,7 @@ block content
   div(class="mx-auto max-w-sm pt-8")
     h3(class="text-xl font-semibold") Add new contact
 
-    form
+    form(hx-target="body", tx-push-url="true", hx-post="/contacts")
       fieldset(class="space-y-4")
         legend(class="sr-only") Add new contact
         +inputText({name: 'firstName', placeholder: 'Enter your first name', error: errors ? errors.firstName : null, value: contact.firstName})
@@ -12,10 +12,5 @@ block content
         +inputText({name: 'phone', placeholder: 'Enter your phone number', error: errors ? errors.phone : null, value: contact.phone})
         +inputText({name: 'email', type: "email", placeholder: 'Enter your email', error: errors ? errors.email : null, value: contact.email})
         div(class="flex items-center gap-4")
-          button(
-            hx-post="/contacts",
-            class="btn btn-primary",
-            hx-target="body",
-            hx-push-url="true"
-          ) Submit
+          button(type="submit", class="btn btn-primary") Submit
           a(class="link", href="/contacts") Back
