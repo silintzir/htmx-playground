@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev:css": "postcss src/public/styles/tailwind.css -o src/public/styles/style.css -w",
-    "dev:ts": "tsx --watch src/index.ts",
+    "dev:ts": "nodemon",
     "dev": "run-p dev:*",
     "db:generate": "drizzle-kit generate:mysql",
     "db:migrate": "tsx ./src/db/migrate.ts",
@@ -18,13 +18,20 @@
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/connect-livereload": "^0.6.3",
     "@types/express": "^4.17.21",
+    "@types/http-errors": "^2.0.4",
+    "@types/livereload": "^0.9.5",
+    "@types/lodash": "^4.14.202",
     "@types/morgan": "^1.9.9",
+    "@types/pug": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "autoprefixer": "^10.4.16",
+    "cross-env": "^7.0.3",
     "daisyui": "^4.4.23",
     "eslint": "^8.56.0",
+    "nodemon": "^3.0.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.32",
     "postcss-cli": "^11.0.0",
@@ -34,13 +41,20 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "connect-livereload": "^0.6.1",
     "dotenv": "^16.3.1",
     "drizzle-kit": "^0.20.7",
     "drizzle-orm": "^0.29.1",
     "express": "^4.18.2",
     "helmet": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "livereload": "^0.9.3",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "morgan": "^1.10.0",
     "mysql2": "^3.6.5",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "zod": "^3.22.4"
   }
 }

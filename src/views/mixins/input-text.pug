@@ -1,0 +1,13 @@
+mixin inputText(config)
+  label(for=config.name, class="form-control w-full")
+    input(
+      id=config.id || config.name,
+      name=config.name,
+      type=config.type || "text",
+      placeholder=config.placeholder,
+      class=("input input-bordered w-full " + (!!config.error ? 'input-error' : '')),
+      value=config.value
+    )
+    if !!config.error
+      div(class="label")
+        span(class="label-text-alt text-error") #{config.error.join('')}

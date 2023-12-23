@@ -1,7 +1,10 @@
+include mixins/input-text.pug
 form(action="/contacts", method="get")
   fieldset(class="space-y-4")
     legend(class="sr-only") Search in contacts
     div(class="flex items-center gap-1 justify-between")
-      label(for="q" class="form-control w-full")
-        input#qdiv(name="q", type="text", placeholder="Search in contacts" class="input input-bordered w-full")
-      button(type="submit", value="search" class="btn btn-primary") Search
+      label(for="q", class="form-control w-full")
+        +inputText({name: 'q', placeholder: 'Search in contacts', value: q})
+      button(type="submit", value="search", class="btn btn-primary") Search
+    div(class="w-full text-center")
+      a(href="?", class="link") Clear search
