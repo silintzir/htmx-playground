@@ -53,18 +53,23 @@ router.get('/:id/email', async (req, res) => {
   }
 });
 
+const PAGE_LIMIT = 10;
 router.get('/', async (req, res) => {
-  const { q } = req.query;
+  const { q, page = 1 } = req.query;
+
+  const offset = (+page - 1) * PAGE_LIMIT;
   const result = q
     ? await db
         .select()
         .from(contacts)
         .where(like(contacts.firstName, `%${q}%`))
-    : await db.query.contacts.findMany();
-
+        .offset(offset)
+        .limit(PAGE_LIMIT)
+    : await db.query.contacts.findMany({ offset, limit: PAGE_LIMIT });
   return res.render('contacts/index', {
     contacts: result,
     q,
+    page: +page,
   });
 });
 
