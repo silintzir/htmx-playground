@@ -10,7 +10,19 @@ block content
         +inputText({name: 'firstName', placeholder: 'Enter your first name', error: errors ? errors.firstName : null, value: contact.firstName})
         +inputText({name: 'lastName', placeholder: 'Enter your last name', error: errors ? errors.lastName : null, value: contact.lastName})
         +inputText({name: 'phone', placeholder: 'Enter your phone number', error: errors ? errors.phone : null, value: contact.phone})
-        +inputText({name: 'email', type: "email", placeholder: 'Enter your email', error: errors ? errors.email : null, value: contact.email})
+        label(for="email", class="form-control w-full")
+          input#email(
+            name="email",
+            type="email",
+            placeholder="Enter your email",
+            class=("input input-bordered w-full " + (errors && errors.email ? 'input-error' : '')),
+            hx-get=`/contacts/${contact.id}/email`,
+            hx-target="next div.error > span",
+            hx-trigger="change, keyup delay:200ms changed",
+            value=contact.email
+          )
+          div(class="label error")
+            span(class="label-text-alt text-error") #{(errors && errors.email) || ""}
         div(class="flex items-center gap-4")
           button(
             hx-put=`/contacts/${contact.id}`,

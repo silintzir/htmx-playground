@@ -52,6 +52,7 @@ app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
     }
   }
 
+  console.log(err);
   res.status(500).render('errors/500');
 });
 

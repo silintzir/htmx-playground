@@ -1,11 +1,12 @@
 import express from 'express';
-import { eq, like } from 'drizzle-orm';
+import { and, eq, like, not } from 'drizzle-orm';
 import createHttpError from 'http-errors';
 import { mdf } from 'domain-functions';
 import { db } from '~/db/connection.js';
 import { contacts } from '~/db/schema.js';
 import { Contact, schema } from '~/models/contacts.js';
 import { parseDomainErrors } from '~/utils/validation.js';
+import { z } from 'zod';
 
 const router = express.Router();
 
@@ -29,6 +30,27 @@ router.get('/:id/edit', async (req, res, next) => {
     return next(createHttpError.NotFound());
   }
   return res.render('contacts/edit', { contact });
+});
+
+router.get('/:id/email', async (req, res) => {
+  const {
+    params: { id },
+    query: { email },
+  } = req;
+
+  if (z.string().email().safeParse(email).success === false) {
+    return res.send('Invalid email');
+  }
+
+  const exists = await db.query.contacts.findFirst({
+    where: and(eq(contacts.email, email as string), not(eq(contacts.id, +id))),
+  });
+
+  if (exists) {
+    res.send('Email already taken');
+  } else {
+    res.send();
+  }
 });
 
 router.get('/', async (req, res) => {

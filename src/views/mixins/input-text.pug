@@ -8,6 +8,5 @@ mixin inputText(config)
       class=("input input-bordered w-full " + (!!config.error ? 'input-error' : '')),
       value=config.value
     )
-    if !!config.error
-      div(class="label")
-        span(class="label-text-alt text-error") #{config.error}
+    div(class="label error")
+      span(class="label-text-alt text-error") #{config.error}
