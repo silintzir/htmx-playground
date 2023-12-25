@@ -1,0 +1,29 @@
+{% liquid
+# Used to generate a text input field
+
+assign labelHidden = labelHidden | default: false
+assign type = type | default: "text"
+assign inputClassnames = inputClassnames | default: ""
+assign error = error | default: ""
+
+if error.size > 0 
+  assign errorClassnames = "input-error"
+else
+  assign errorClassnames = ""
+endif
+%}
+
+<label class="form-control w-full">
+  {% if label and labelHidden == false %}
+    <div class="label">
+      <span class="label-text">{{label}}</span>
+      <span class="label-text-alt">foobar</span>
+    </div>
+  {% endif %}
+  <input type="{{type}}" class="input input-bordered {{inputClassnames}} {{ errorClassnames }}" placeholder="{{placeholder}}" />
+  {% if error.size %}
+  <div class="label error">
+    <span class="label-text text-error">{{error}}</span>
+  </div>
+  {% endif %}
+</label>

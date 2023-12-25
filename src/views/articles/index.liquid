@@ -1,0 +1,19 @@
+<html data-them="light">
+<head>
+  <title>Liquid + Express</title>
+  <link href="/styles/style.css" rel="stylesheet"  />
+</head>
+<body>
+{% layout 'default-layout.liquid' %}
+
+{% block content %}
+<p>Some nice content</p>
+
+<div class="mx-auto max-w-sm">
+  {% render 'input.liquid', label: 'Username', labelHidden: false, placeholder: "Enter your username",  error: 'Field is required' %}
+</div>
+
+{% endblock %}
+
+</body>
+</html>

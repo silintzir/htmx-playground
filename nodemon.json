@@ -1,6 +1,6 @@
 {
   "exec": "cross-env NODE_ENV=development tsx ./src/index.ts",
-  "ext": "ts,pug",
+  "ext": "ts,pug,liquid",
   "verbose": true,
   "watch": ["./src/**/*", "./.env"]
 }
