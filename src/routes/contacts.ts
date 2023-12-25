@@ -7,10 +7,12 @@ import { contacts } from '~/db/schema.js';
 import { Contact, schema } from '~/models/contacts.js';
 import { parseDomainErrors } from '~/utils/validation.js';
 import { z } from 'zod';
+import { delay } from '~/utils/misc.js';
 
 const router = express.Router();
 
-router.get('/new', (_, res) => {
+router.get('/new', async (_, res) => {
+  await delay(3000);
   return res.render('contacts/new', {
     contact: {
       firstName: '',
@@ -66,6 +68,9 @@ router.get('/', async (req, res) => {
         .offset(offset)
         .limit(PAGE_LIMIT)
     : await db.query.contacts.findMany({ offset, limit: PAGE_LIMIT });
+
+  await delay(1000);
+
   return res.render('contacts/index', {
     contacts: result,
     q,
